@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.game.bankline.entity.enums.TipoMovimento;
 
 @Entity
@@ -25,8 +26,13 @@ public class Lancamento {
 	
 	private Integer conta;
 	
+<<<<<<< HEAD
 	@Column(columnDefinition = "DATE")
 	private LocalDate data;
+=======
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date data;
+>>>>>>> branch 'master' of https://github.com/tanakav/bankline-gama.git
 	
 	private String descricao;
 

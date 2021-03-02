@@ -21,7 +21,11 @@ public class Usuario{
 	private String nome;
 	
 	@NotNull
+<<<<<<< HEAD
 	@Size(min = 6, max = 20)
+=======
+	@Size(max=20)
+>>>>>>> branch 'master' of https://github.com/tanakav/bankline-gama.git
 	private String login;
 	
 	@NotNull

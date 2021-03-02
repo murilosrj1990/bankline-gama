@@ -4,13 +4,20 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class LancamentoDto {
 	
 	private Integer conta;
 	
+<<<<<<< HEAD
 	private String contaDestino;
 
 	private LocalDate data;
+=======
+	@JsonFormat(pattern="yyyy-MM-dd")
+	private Date data;
+>>>>>>> branch 'master' of https://github.com/tanakav/bankline-gama.git
 	
 	private String descricao;
 
@@ -19,8 +26,13 @@ public class LancamentoDto {
 	private Double valor;
 	
 	public LancamentoDto() {}
+<<<<<<< HEAD
 	
 	public LancamentoDto(Integer conta, LocalDate data, String descricao, Integer planoConta, Double valor) {
+=======
+
+	public LancamentoDto(Integer conta, Date data, String descricao, Integer planoConta, Double valor) {
+>>>>>>> branch 'master' of https://github.com/tanakav/bankline-gama.git
 		super();
 		this.conta = conta;
 		this.data = data;
@@ -81,6 +93,17 @@ public class LancamentoDto {
 		this.descricao = descricao;
 	}
 
+<<<<<<< HEAD
+=======
+	public Integer getPlanoConta() {
+		return planoConta;
+	}
+
+	public void setPlanoConta(Integer planoConta) {
+		this.planoConta = planoConta;
+	}
+
+>>>>>>> branch 'master' of https://github.com/tanakav/bankline-gama.git
 	public Double getValor() {
 		return valor;
 	}
