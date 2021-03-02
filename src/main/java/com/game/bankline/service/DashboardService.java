@@ -34,9 +34,9 @@ public class DashboardService {
 		}else {
 			
 			Conta contaDebito = contaRepository.
-					findByNumeroAndTipoConta(numeroDaConta, TipoConta.DEBITO.getId()).get();
+					findByNumeroAndTipoConta(numeroDaConta, TipoConta.DEBITO).get();
 			Conta contaCredito = contaRepository.
-					findByNumeroAndTipoConta(numeroDaConta, TipoConta.CREDITO.getId()).get();
+					findByNumeroAndTipoConta(numeroDaConta, TipoConta.CREDITO).get();
 			
 			dashboardDto.setContaDebito(getLancamentosDaConta(contaDebito,dataInicial,dataFinal));
 			dashboardDto.setContaCredito(getLancamentosDaConta(contaCredito,dataInicial,dataFinal));			
@@ -50,8 +50,7 @@ public class DashboardService {
 		List<Lancamento> lancamentos = lancamentoRepository
 				.findAllByContaAndDataBetween(conta.getId(),dataInicial,dataFinal);
 		
-		contaDto.setNumero(conta.getId());
-		contaDto.setTipo(conta.getTipo().getDescricao());
+		contaDto.setId(conta.getId());
 		contaDto.setSaldo(conta.getSaldo());
 		contaDto.setLancamentos(lancamentos);
 		

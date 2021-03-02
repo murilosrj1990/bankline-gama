@@ -6,8 +6,7 @@ import com.game.bankline.entity.Lancamento;
 
 public class ContaDto {
 	
-	private Integer numero;
-	private String tipo;
+	private Integer id;
 	private Double saldo;
 	private List<Lancamento> lancamentos;
 	
@@ -15,25 +14,18 @@ public class ContaDto {
 	
 	public ContaDto(Integer numero, String tipo, Double saldo, List<Lancamento> lancamentos) {
 		super();
-		this.numero = numero;
-		this.tipo = tipo;
+		this.id = numero;
 		this.lancamentos = lancamentos;
 	}
 
-	public Integer getNumero() {
-		return numero;
+	
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNumero(Integer numero) {
-		this.numero = numero;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public List<Lancamento> getLancamentos() {

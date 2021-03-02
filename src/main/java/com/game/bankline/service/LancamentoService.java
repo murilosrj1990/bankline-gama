@@ -1,9 +1,11 @@
 package com.game.bankline.service;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.game.bankline.dto.LancamentoDto;
+import com.game.bankline.entity.Conta;
 import com.game.bankline.entity.Lancamento;
 import com.game.bankline.entity.PlanoConta;
 import com.game.bankline.exceptions.ObjectNotFoundException;
@@ -25,13 +27,11 @@ public class LancamentoService {
 	
 	public void salvarLancamento(LancamentoDto lancamentoRequest) {
 		Lancamento lancamento = new Lancamento();
-		
 		lancamento.setConta(lancamentoRequest.getConta());
 		lancamento.setData(lancamentoRequest.getData());
 		lancamento.setDescricao(lancamentoRequest.getDescricao());
-		PlanoConta planoConta = getPlanoConta(lancamentoRequest.getTipoPlanoConta());
-		lancamento.setPlanoConta(planoConta);
-		lancamento.setTipo(planoConta.getTipoMovimento());
+		lancamento.setPlanoConta(lancamentoRequest.getPlanoConta());
+		lancamento.setTipo(getPlanoConta(lancamento.getPlanoConta()).getTipoMovimento());
 		lancamento.setValor(lancamentoRequest.getValor());
 		
 		lancamentoRepository.save(lancamento);	
@@ -49,6 +49,15 @@ public class LancamentoService {
 		
 		return planoConta;
 		
+	}
+	
+	private Conta getConta(Integer id) {
+		Conta conta = contaRepository.findById(id).get();
+		
+		if(conta==null) {
+			throw new ObjectNotFoundException("Conta de id "+id+" nao encontrado");
+		}
+		return conta;
 	}
 	
 }

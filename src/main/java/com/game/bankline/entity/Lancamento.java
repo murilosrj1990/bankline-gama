@@ -1,13 +1,15 @@
 package com.game.bankline.entity;
 
-import java.sql.Date;
 
+import java.time.LocalDate;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.game.bankline.entity.enums.TipoMovimento;
@@ -20,19 +22,21 @@ public class Lancamento {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	
+	
 	private Integer conta;
 	
-	private Date data;
+	@Column(columnDefinition = "DATE")
+	private LocalDate data;
 	
 	private String descricao;
 
-	private Integer tipoMovimento;
+	@Enumerated(EnumType.STRING)
+	private TipoMovimento tipo;
 	
 	private Double valor;
 	
-	@ManyToOne
-	@JoinColumn(name = "id_plano_conta")
-	private PlanoConta planoConta;
+	
+	private Integer planoConta;
 	
 	public Integer getId() {
 		return id;
@@ -42,19 +46,15 @@ public class Lancamento {
 		this.id = id;
 	}
 
-	public Integer getConta() {
-		return conta;
-	}
+	
 
-	public void setConta(Integer conta) {
-		this.conta = conta;
-	}
+	
 
-	public Date getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(Date data) {
+	public void setData(LocalDate data) {
 		this.data = data;
 	}
 
@@ -66,13 +66,7 @@ public class Lancamento {
 		this.descricao = descricao;
 	}
 
-	public PlanoConta getPlanoConta() {
-		return planoConta;
-	}
-
-	public void setPlanoConta(PlanoConta planoConta) {
-		this.planoConta = planoConta;
-	}
+	
 
 	public Double getValor() {
 		return valor;
@@ -81,13 +75,35 @@ public class Lancamento {
 	public void setValor(Double valor) {
 		this.valor = valor;
 	}
+
 	
+
 	public TipoMovimento getTipo() {
-		return TipoMovimento.toEnum(tipoMovimento);
+		return tipo;
 	}
 
 	public void setTipo(TipoMovimento tipo) {
-		this.tipoMovimento = tipo.getId();
+		this.tipo = tipo;
 	}
 
+	public Integer getConta() {
+		return conta;
+	}
+
+	public void setConta(Integer conta) {
+		this.conta = conta;
+	}
+
+	public Integer getPlanoConta() {
+		return planoConta;
+	}
+
+	public void setPlanoConta(Integer planoConta) {
+		this.planoConta = planoConta;
+	}
+
+	
+
+	
+	
 }
