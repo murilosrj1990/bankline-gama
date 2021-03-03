@@ -1,6 +1,8 @@
 package com.game.bankline.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,8 +23,9 @@ public class Conta {
 	private String numero;	
 
 	private Double saldo;
-
-	private Integer tipoConta;
+	
+	@Enumerated(EnumType.STRING)
+	private TipoConta tipoConta;
 	
 	public Conta() {}	
 
@@ -32,7 +35,7 @@ public class Conta {
 		this.id = id;
 		this.numero = numero;
 		this.saldo = saldo;
-		this.tipoConta = tipo.getId();
+		this.tipoConta = tipo;
 	}
 
 	public Integer getId() {
@@ -67,12 +70,12 @@ public class Conta {
 		this.saldo = saldo;
 	}
 
-	public TipoConta getTipo() {
-		return TipoConta.toEnum(tipoConta);
+	public TipoConta getTipoConta() {
+		return tipoConta;
 	}
 
-	public void setTipo(TipoConta tipo) {
-		this.tipoConta = tipo.getId();
+	public void setTipoConta(TipoConta tipoConta) {
+		this.tipoConta = tipoConta;
 	}
 
 	@Override

@@ -30,7 +30,6 @@ public class Usuario{
 	private String nome;
 	
 	@NotNull
-	
 	@Size(min = 6, max = 20)
 	private String login;
 	

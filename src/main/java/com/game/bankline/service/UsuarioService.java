@@ -2,6 +2,7 @@ package com.game.bankline.service;
 
 import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,7 @@ public class UsuarioService {
             throw new DuplicateKeyException("Login "+usuario.getLogin()+" ja utilizado");
             
         } else {
+        	passwordEncoder = new BCryptPasswordEncoder();
         	usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         	Usuario usuarioCriado = usuarioRepository.save(usuario);
         	novoUsuario.setLogin(usuarioCriado.getLogin());
@@ -64,6 +66,22 @@ public class UsuarioService {
         }	
 		
 		return novoUsuario;
+	}
+	
+	public Usuario findByLogin(String login) {
+		Usuario usuario = usuarioRepository.findByLogin(login).get();
+		if(usuario==null) {
+			throw new ObjectNotFoundException("Usuario com login: "+login+" nao encontrado!");
+		}
+		return usuario;
+	}
+	
+	public Usuario findByCpf(String cpf) {
+		Usuario usuario = usuarioRepository.findByCpf(cpf).get();
+		if(usuario==null) {
+			throw new ObjectNotFoundException("Usuario com login: "+cpf+" nao encontrado!");
+		}
+		return usuario;
 	}
 	
 	public UsuarioDto findUsuarioById(Integer id) {

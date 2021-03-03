@@ -1,9 +1,12 @@
 package com.game.bankline.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.game.bankline.entity.enums.TipoMovimento;
@@ -23,7 +26,8 @@ public class PlanoConta {
 	
 	private boolean padrao;
 	
-	private Integer tipoMovimento;
+	@Enumerated(EnumType.STRING)
+	private TipoMovimento tipoMovimento;
 	
 	public PlanoConta() {}	
 
@@ -33,6 +37,14 @@ public class PlanoConta {
 		this.descricao = descricao;
 		this.login = login;
 		this.padrao = padrao;
+		this.tipoMovimento = tipoMovimento;
+	}
+
+	public TipoMovimento getTipoMovimento() {
+		return tipoMovimento;
+	}
+
+	public void setTipoMovimento(TipoMovimento tipoMovimento) {
 		this.tipoMovimento = tipoMovimento;
 	}
 
@@ -67,13 +79,5 @@ public class PlanoConta {
 	public void setPadrao(boolean padrao) {
 		this.padrao = padrao;
 	}
-
-	public TipoMovimento getTipoMovimento() {
-		return TipoMovimento.toEnum(tipoMovimento);
-	}
-
-	public void setTipoMovimento(TipoMovimento tipoMovimento) {
-		this.tipoMovimento = tipoMovimento.getId();
-	}	
 
 }
